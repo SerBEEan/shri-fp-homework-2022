@@ -100,6 +100,7 @@ export const validateFieldN4 = allPass([isCircleBlue, isStarRed, isSquareOrange]
 export const validateFieldN5 = anyPass([isCountRedMoreThree, isCountOrangeMoreThree, isCountGreenMoreThree, isCountBlueMoreThree]);
 
 // 6. Ровно две зеленые фигуры (одна из зелёных – это треугольник), плюс одна красная. Четвёртая оставшаяся любого доступного цвета, но не нарушающая первые два условия
+// ! сделал ровно две зеленых И ровно одну красную
 export const validateFieldN6 = allPass([isTriangleGreen, isCountGreenEqualTwo, isOnlyRedAnyShapeButNotTriangle]);
 
 // 7. Все фигуры оранжевые.
