@@ -72,13 +72,16 @@ const isCountOrangeMoreThree = compose(lte(3), prop(ORANGE), groupCountOfValues,
 const isCountGreenMoreThree = compose(lte(3), prop(GREEN), groupCountOfValues, values);
 const isCountBlueMoreThree = compose(lte(3), prop(BLUE), groupCountOfValues, values);
 
+const isCountRedEqualOne = compose(equals(1), prop(RED), groupCountOfValues, values);
+const isCountGreenEqualTwo = compose(equals(2), prop(GREEN), groupCountOfValues, values);
+
 const isCountRedMoreZero = compose(lt(0), prop(RED), groupCountOfValues, values);
 const isCountBlueMoreZero = compose(lt(0), prop(BLUE), groupCountOfValues, values);
 
-const isCountGreenEqualTwo = compose(equals(2), prop(GREEN), groupCountOfValues, values);
 const isRedAnyShapeButNotTriangle = anyPass([isStarRed, isSquareRed, isCircleRed]);
 const isTriangleAndSquareSameColor = converge(equals, [getTriangle, getSquare]);
 
+const isOnlyRedAnyShapeButNotTriangle = allPass([isRedAnyShapeButNotTriangle, isCountRedEqualOne]);
 const isEqualsCountRedAndBlue = converge(equals, [countShapeIsBlue, countShapeIsRed]);
 
 // 1. Красная звезда, зеленый квадрат, все остальные белые.
@@ -97,7 +100,7 @@ export const validateFieldN4 = allPass([isCircleBlue, isStarRed, isSquareOrange]
 export const validateFieldN5 = anyPass([isCountRedMoreThree, isCountOrangeMoreThree, isCountGreenMoreThree, isCountBlueMoreThree]);
 
 // 6. Ровно две зеленые фигуры (одна из зелёных – это треугольник), плюс одна красная. Четвёртая оставшаяся любого доступного цвета, но не нарушающая первые два условия
-export const validateFieldN6 = allPass([isTriangleGreen, isCountGreenEqualTwo, isRedAnyShapeButNotTriangle]);
+export const validateFieldN6 = allPass([isTriangleGreen, isCountGreenEqualTwo, isOnlyRedAnyShapeButNotTriangle]);
 
 // 7. Все фигуры оранжевые.
 export const validateFieldN7 = allPass([isStarOrange, isSquareOrange, isTriangleOrange, isCircleOrange]);
